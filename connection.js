@@ -19,7 +19,7 @@ async function makeDbCalls(err){
     // Handle any DB connection errors
     if(err){
         console.error(`An error occurred while connecting to the MongoClient: ${err}`);
-        return {error: err};
+        return;
     } else {
       console.log("Connected successfully to the server");
     } 
@@ -31,8 +31,8 @@ async function makeDbCalls(err){
     try {
         await printFiveListings(collection);
     } catch (e) {
-        console.error(`Unable to print listings: ${e}`)
-        return {error: e};
+        console.error(`Unable to print listings: ${e}`);
+        return;
     }
   
     // Close the DB connection
@@ -46,6 +46,6 @@ async function makeDbCalls(err){
 async function printFiveListings(collection){
     const results = await collection.find({}).limit(5).toArray();
 
-    console.log("Found Airbnb listings in the database:")
+    console.log("Found Airbnb listings in the database:");
     results.forEach(result => console.log(` - ${result.name}`));
 };
