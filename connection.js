@@ -26,6 +26,7 @@ async function main(){
     } catch (e) {
         console.error(e);
     } finally {
+        // Close the connection to the MongoDB cluster
         await client.close();
     }
 }
